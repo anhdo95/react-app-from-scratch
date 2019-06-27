@@ -1,13 +1,8 @@
 import React, { Component } from 'react'
+import Story from '@app/components/Story/Container'
 
-class App extends Component {
-  render() {
-    return (
-      <div>
-        Welcome to ReactJS
-      </div>
-    )
-  }
+const App = () => {
+	return <Story />
 }
 
 export default App
