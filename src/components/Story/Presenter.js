@@ -6,12 +6,10 @@ export default class Presenter extends Component {
 	}
 
 	render() {
-		console.log('this.props :', this.props)
-
 		return (
 			<div>
 				{this.props.stories.map((story) => (
-					<li>{story.title}</li>
+					<li key={story.objectID}>{story.title}</li>
 				))}
 			</div>
 		)

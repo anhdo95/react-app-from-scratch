@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 
 import Presenter from './Presenter'
 
-import { setStories } from '@app/redux/actions/story';
+import { fetchStories } from '@actions/story'
 
 const mapStateToProps = (state) => {
 	return {
@@ -12,15 +12,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-    loadingStories: () => {
-      fetch(`https://hn.algolia.com/api/v1/search?tags=story`)
-        .then(res => res.json())
-        .then(data => {
-          console.log('data', data)
-          dispatch(setStories(data.hits))
-        })
-    }
-  }
+		loadingStories: () => dispatch(fetchStories()),
+	}
 }
 
 export default connect(

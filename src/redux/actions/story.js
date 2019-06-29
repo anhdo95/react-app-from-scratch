@@ -6,11 +6,13 @@ export const fetchStories = () => {
   }
 }
 
-export const setStories = (stories) => {
+export const setStories = (stories, error) => {
   return {
     type: SET_STORIES,
     payload: {
-      stories
-    }
+      stories,
+      error
+    },
+    error: !!error
   }
 }
