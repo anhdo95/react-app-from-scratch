@@ -5,13 +5,15 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
   entry: {
-    app: resolve(__dirname, "src/index.js")
+    polyfills: resolve(__dirname, "src/polyfills.js"),
+    app: resolve(__dirname, "src/index.js"),
   },
   mode: "development",
   output: {
-    filename: "bundle.js",
+    filename: "[name].bundle.js",
     path: resolve(__dirname, "dist")
   },
+  devtool: 'inline-source-map',
   devServer: {
     contentBase: resolve(__dirname, "dist"),
     port: 3000,
@@ -28,7 +30,11 @@ module.exports = {
   },
   resolve: {
     alias: {
-      "@app": resolve(__dirname, "src")
+      "@app": resolve(__dirname, "src"),
+      "@components": resolve(__dirname, "src/components"),
+      "@services": resolve(__dirname, "src/services"),
+      "@actions": resolve(__dirname, "src/redux/actions"),
+      "@sagas": resolve(__dirname, "src/redux/sagas"),
     }
   },
   plugins: [
