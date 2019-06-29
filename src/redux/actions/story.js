@@ -1,4 +1,10 @@
-import { SET_STORIES } from '@app/constants'
+import { SET_STORIES, FETCH_STORIES } from '@app/constants'
+
+export const fetchStories = () => {
+  return {
+    type: FETCH_STORIES,
+  }
+}
 
 export const setStories = (stories) => {
   return {
