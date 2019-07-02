@@ -1,22 +1,22 @@
 import { takeEvery, call, put, all } from 'redux-saga/effects'
 
-import { setStories } from "@actions/story";
-import { FETCH_STORIES } from '@app/constants';
-import storyService from '@services/story'
+import { setTodos } from "@actions/todo";
+import { FETCH_TODOS } from '@app/constants';
+import todoService from '@services/todo'
 
-function* fetchStories() {
+function* fetchTodos() {
   try {
-    const stories = yield call(storyService.getStories)
+    const todos = yield call(todoService.getTodos)
 
-    yield put(setStories(stories))
+    yield put(setTodos(todos))
 
   } catch (error) {
-    yield put(setStories(undefined, error))
+    yield put(setTodos(undefined, error))
   }
 }
 
 export default function* rootSaga() {
   yield all([
-    takeEvery(FETCH_STORIES, fetchStories)
+    takeEvery(FETCH_TODOS, fetchTodos)
   ])
 }

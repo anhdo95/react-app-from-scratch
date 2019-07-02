@@ -2,17 +2,17 @@ import { connect } from 'react-redux'
 
 import Presenter from './Presenter'
 
-import { fetchStories } from '@actions/story'
+import { fetchTodos } from '@actions/todo'
 
 const mapStateToProps = (state) => {
 	return {
-		stories: state.story.stories,
+		todos: state.todo.todos,
 	}
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		loadingStories: () => dispatch(fetchStories()),
+		loadingTodos: () => dispatch(fetchTodos()),
 	}
 }
 

@@ -2,14 +2,14 @@ import React, { Component } from 'react'
 
 export default class Presenter extends Component {
 	componentDidMount() {
-		this.props.loadingStories()
+		this.props.loadingTodos()
 	}
 
 	render() {
 		return (
 			<div>
-				{this.props.stories.map((story) => (
-					<li key={story.objectID}>{story.title}</li>
+				{this.props.todos.map((todo) => (
+					<li key={todo.id}>{todo.title}</li>
 				))}
 			</div>
 		)

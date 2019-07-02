@@ -1,15 +1,19 @@
 import { combineReducers } from 'redux'
-import { SET_STORIES } from '@app/constants'
+import { ADD_TODO, SET_TODOS } from '@app/constants'
 
 const initialState = {
-	stories: [],
+	todos: [],
 }
 
-const story = (state = initialState, action) => {
+const todo = (state = initialState, action) => {
 	switch (action.type) {
-		case SET_STORIES:
-      console.log('action', action)
-			state.stories = action.payload.stories
+		case SET_TODOS:
+			state.todos = action.payload.todos
+
+			return { ...state }
+
+		case ADD_TODO:
+			state = state.todos.concat(action.payload.todo)
 
 			return { ...state }
 
@@ -19,5 +23,5 @@ const story = (state = initialState, action) => {
 }
 
 export default combineReducers({
-	story,
+	todo,
 })
