@@ -1,6 +1,11 @@
-import React, { Component } from 'react'
+import * as React from 'react'
 
-export default class Presenter extends Component {
+interface PresenterProps {
+  todos: Todo[]
+  loadingTodos: () => void
+}
+
+export default class Presenter extends React.Component<PresenterProps> {
 	componentDidMount() {
 		this.props.loadingTodos()
 	}

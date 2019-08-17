@@ -1,7 +1,7 @@
 import { takeEvery, call, put, all } from 'redux-saga/effects'
 
 import { setTodos } from "@actions/todo";
-import { FETCH_TODOS } from '@app/constants';
+import { FETCH_TODOS } from '@/constants';
 import todoService from '@services/todo'
 
 function* fetchTodos() {

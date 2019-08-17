@@ -1,4 +1,4 @@
-import { ADD_TODO, FETCH_TODOS, SET_TODOS } from '@app/constants'
+import { ADD_TODO, FETCH_TODOS, SET_TODOS } from '@/constants'
 
 export const fetchTodos = () => {
 	return {
@@ -6,7 +6,7 @@ export const fetchTodos = () => {
 	}
 }
 
-export const setTodos = (todos, error) => {
+export const setTodos = (todos: Todo[], error?: any) => {
   return {
     type: SET_TODOS,
     payload: {
@@ -18,7 +18,7 @@ export const setTodos = (todos, error) => {
 };
 
 
-export const addTodo = (todo) => {
+export const addTodo = (todo: Todo) => {
 	return {
 		type: ADD_TODO,
 		payload: {
