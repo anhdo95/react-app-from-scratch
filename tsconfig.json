@@ -13,8 +13,7 @@
 			"@components/*": ["src/components/*"],
 			"@services/*": ["src/services/*"],
 			"@redux/*": ["src/redux/*"],
-			"@actions/*": ["src/redux/actions/*"],
-			"@sagas/*": ["src/redux/sagas/*"]
+			"@interfaces/*": ["src/interfaces/*"],
 		}
 	}
 }

@@ -1,13 +1,11 @@
 import { createStore, applyMiddleware } from 'redux'
-import createSagaMiddleware from 'redux-saga'
 
-import rootReducer from '@redux/reducers'
-import rootSaga from '@redux/sagas'
+import rootReducer from '@/redux'
 
-const sagaMiddleware = createSagaMiddleware()
+const store: any = createStore(rootReducer)
 
-const store: any = createStore(rootReducer, applyMiddleware(sagaMiddleware))
-
-sagaMiddleware.run(rootSaga)
+if (process.env.NODE_ENV === 'development') {
+  (global as any)._store = store
+}
 
 export default store

@@ -41,8 +41,7 @@ module.exports = {
 			'@components': resolve(__dirname, 'src/components'),
 			'@redux': resolve(__dirname, 'src/redux'),
 			'@services': resolve(__dirname, 'src/services'),
-			'@actions': resolve(__dirname, 'src/redux/actions'),
-			'@sagas': resolve(__dirname, 'src/redux/sagas'),
+			'@interfaces': resolve(__dirname, 'src/interfaces'),
 		},
 	},
 	// When importing a module whose path matches one of the following, just
