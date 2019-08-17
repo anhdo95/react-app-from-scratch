@@ -1,0 +1,3 @@
+interface TodoState {
+  todos: Todo[]
+}
