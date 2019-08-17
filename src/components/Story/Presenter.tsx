@@ -2,12 +2,12 @@ import * as React from 'react'
 
 interface PresenterProps {
   todos: Todo[]
-  loadingTodos: () => void
+  getTodos: () => any
 }
 
 export default class Presenter extends React.Component<PresenterProps> {
 	componentDidMount() {
-		this.props.loadingTodos()
+		this.props.getTodos()
 	}
 
 	render() {

@@ -1,23 +1,30 @@
-import { connect } from 'react-redux'
-import { Dispatch } from 'redux';
+import RootState from '@/interfaces/state/root-state'
 
-import { fetchTodos } from '@actions/todo'
+import TodoService from '@/services/todo-service'
+
+import { composeContainer } from '@/util'
 
 import Presenter from './Presenter'
 
 const mapStateToProps = (state: RootState) => {
+  console.log('state', state)
   return {
     todos: state.todo.todos,
   }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch) => {
+const mapDispatchToProps = () => {
+  const todoService = new TodoService()
+
   return {
-    loadingTodos: () => dispatch(fetchTodos()),
+    async getTodos() {
+      try {
+        return await todoService.getTodos()
+      } catch (error) {
+        console.error(error)
+      }
+    },
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Presenter)
+export default composeContainer(Presenter, mapStateToProps, mapDispatchToProps)

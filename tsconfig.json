@@ -14,6 +14,11 @@
 			"@services/*": ["src/services/*"],
 			"@redux/*": ["src/redux/*"],
 			"@interfaces/*": ["src/interfaces/*"],
-		}
+    },
+    "plugins": [
+      {
+        "name": "typescript-tslint-plugin"
+      }
+    ]
 	}
 }
