@@ -1,5 +1,5 @@
 export default {
   todo: {
-    all: 'http://localhost:5000/api/v1/todos',
+    all: '/api/v1/todos',
   }
 }

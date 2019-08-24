@@ -2,6 +2,7 @@ const { resolve } = require('path')
 const { HotModuleReplacementPlugin } = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const WebpackNotifier = require('webpack-notifier');
 
 module.exports = {
 	entry: {
@@ -17,15 +18,34 @@ module.exports = {
 	devServer: {
 		contentBase: resolve(__dirname, 'dist'),
 		port: 3000,
-		hot: true,
+    hot: true,
+    host: '127.0.0.1',
+    // host: '0.0.0.0' // allow to be accessible externally
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+      'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization'
+    },
+    proxy: [
+      {
+        context: [
+          '/api'
+        ],
+        target: 'http://127.0.0.1:5000/',
+        secure: false,
+        headers: {
+          host: 'http://127.0.0.1:3000'
+        }
+      }
+    ]
 	},
 	module: {
 		rules: [
-			{
-				test: /\.ts(x?)$/,
+      {
+        test: /\.ts(x?)$/,
 				exclude: /node_modules/,
 				loader: 'ts-loader',
-			},
+      },
 			// All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
 			{
 				enforce: 'pre',
@@ -42,7 +62,7 @@ module.exports = {
 			'@redux': resolve(__dirname, 'src/redux'),
 			'@services': resolve(__dirname, 'src/services'),
 			'@interfaces': resolve(__dirname, 'src/interfaces'),
-		},
+    }
 	},
 	// When importing a module whose path matches one of the following, just
 	// assume a corresponding global variable exists and use that instead.
@@ -53,6 +73,7 @@ module.exports = {
 		'react-dom': 'ReactDOM',
 	},
 	plugins: [
+    new WebpackNotifier({title: 'Webpack'}),
 		new CleanWebpackPlugin(),
 		new HtmlWebpackPlugin({
 			template: './public/index.html',
