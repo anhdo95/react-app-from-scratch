@@ -1,7 +1,14 @@
 {
+  "extends": [
+    "tslint:latest",
+    "tslint-config-prettier"
+  ],
   "rules": {
-      "prettier": true,
-
+      "forin": false,
+      "no-submodule-imports": false,
+      "no-implicit-dependencies": false,
+      "ordered-imports": false,
+      "object-literal-sort-keys": false,
       "cyclomatic-complexity": false,
       "increment-decrement": false,
       "newline-before-return": false,
@@ -63,8 +70,9 @@
               "order": "statics-first"
           }
       },
-      "no-console": true,
+      "no-console": [true, "log"],
       "no-debugger": true,
+      "no-duplicate-variable": [true, "check-parameters"],
       "no-switch-case-fall-through": true,
       "strict-boolean-expressions": false,
       "switch-default": false,
