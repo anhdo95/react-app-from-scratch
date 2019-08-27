@@ -46,6 +46,15 @@ module.exports = {
 				exclude: /node_modules/,
 				loader: 'ts-loader',
       },
+      {
+        test: /\.s[ac]ss$/,
+				exclude: /node_modules/,
+				use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader'
+        ],
+      },
 			// All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
 			{
 				enforce: 'pre',
@@ -55,7 +64,7 @@ module.exports = {
 		],
 	},
 	resolve: {
-		extensions: ['.ts', '.tsx', '.js'],
+		extensions: ['.ts', '.tsx', '.js', '.css', '.scss', '.sass'],
 		alias: {
 			'@': resolve(__dirname, 'src'),
 			'@components': resolve(__dirname, 'src/components'),

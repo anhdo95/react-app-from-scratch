@@ -1,5 +1,7 @@
 import * as React from 'react'
 
+import './style.scss'
+
 interface PresenterProps {
   todos: Todo[]
   getTodos: () => any
