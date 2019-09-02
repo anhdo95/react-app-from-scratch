@@ -2,12 +2,15 @@ const { resolve } = require('path')
 const { HotModuleReplacementPlugin } = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const WebpackNotifier = require('webpack-notifier');
+const WebpackNotifier = require('webpack-notifier')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+
+const devMode = process.env.NODE_ENV !== 'production'
 
 module.exports = {
 	entry: {
 		polyfills: resolve(__dirname, "src/polyfills.js"),
-		app: resolve(__dirname, 'src/index.tsx'),
+    app: resolve(__dirname, 'src/index.tsx'),
 	},
 	mode: 'development',
 	output: {
@@ -47,14 +50,28 @@ module.exports = {
 				loader: 'ts-loader',
       },
       {
-        test: /\.s[ac]ss$/,
+        test: /\.(sa|sc|c)ss$/,
 				exclude: /node_modules/,
-				use: [
-          'style-loader',
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: process.env.NODE_ENV === 'development',
+            },
+          },
           'css-loader',
-          'sass-loader'
+          'postcss-loader',
+          'sass-loader',
         ],
       },
+			// {
+			// 	test: /.*\.(gif|png|jp(e*)g|svg)$/i,
+			// 	use: [
+			// 			{
+			// 					loader: "url-loader",
+			// 			}
+			// 	]
+			// },
 			// All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
 			{
 				enforce: 'pre',
@@ -64,7 +81,7 @@ module.exports = {
 		],
 	},
 	resolve: {
-		extensions: ['.ts', '.tsx', '.js', '.css', '.scss', '.sass'],
+		extensions: ['.ts', '.tsx', '.js', '.scss', '.sass', '.css'],
 		alias: {
 			'@': resolve(__dirname, 'src'),
 			'@components': resolve(__dirname, 'src/components'),
@@ -80,14 +97,27 @@ module.exports = {
 	externals: {
 		react: 'React',
 		'react-dom': 'ReactDOM',
-	},
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    }
+  },
 	plugins: [
     new WebpackNotifier({title: 'Webpack'}),
 		new CleanWebpackPlugin(),
 		new HtmlWebpackPlugin({
 			template: './public/index.html',
-			filename: './index.html',
-		}),
+      filename: './index.html',
+      minify: {
+        minifyCSS: false,
+        minifyJS: false,
+      }
+    }),
+    new MiniCssExtractPlugin({
+      filename: devMode ? 'style/[name].css' : '[name].[hash].css',
+      chunkFilename: devMode ? 'style/[id].css' : '[id].[hash].css',
+    }),
 		new HotModuleReplacementPlugin(),
 	],
 }
