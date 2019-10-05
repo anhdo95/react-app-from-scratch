@@ -1,0 +1,23 @@
+@import '@/styles/main.scss';
+
+.nav {
+  position: fixed;
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+  background-color: $c-black;
+}
+
+.nav__links {
+  display: flex;
+}
+
+.nav__anchor {
+  display: block;
+  padding: 18px 24px;
+  color: $c-white;
+}
+
+.nav__dropdown {
+  display: none;
+}
