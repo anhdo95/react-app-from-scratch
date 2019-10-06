@@ -7,3 +7,7 @@
     padding-bottom: percentage($height / $width);
   }
 }
+
+@mixin transition ($property: 'all', $duration: $duration, $timing: $ease) {
+  transition: $property $duration $timing;
+}
