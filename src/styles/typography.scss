@@ -1,5 +1,17 @@
 @import './variables.scss';
 
-body {
-  font-family: $f-primary;
+.link {
+  display: block;
+  padding: 16px 24px;
+  font-size: 14px;
+  color: $c-white;
+  text-transform: uppercase;
+}
+
+.dropdown-link {
+  display: block;
+  font-size: 14px;
+  color: $c-black;
+  background-color: $c-white;
+  padding: 8px 16px;
 }
