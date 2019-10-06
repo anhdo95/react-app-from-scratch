@@ -7,15 +7,15 @@ const merge = require('webpack-merge')
 
 module.exports = merge(common, {
   cache: true, // for rebuilding faster
-	mode: 'development',
-	output: {
-		filename: '[name].bundle.js',
-		path: resolve('dist'),
-	},
-	devtool: 'source-map',
-	devServer: {
-		contentBase: resolve('dist'),
-		port: 3000,
+  mode: 'development',
+  output: {
+    filename: '[name].bundle.js',
+    path: resolve('dist'),
+  },
+  devtool: 'source-map',
+  devServer: {
+    contentBase: resolve('dist'),
+    port: 3000,
     hot: true,
     host: '127.0.0.1',
     // host: '0.0.0.0' // allow to be accessible externally
@@ -36,17 +36,17 @@ module.exports = merge(common, {
         }
       }
     ]
-	},
-	module: {
-		rules: [
+  },
+  module: {
+    rules: [
       {
         test: /\.ts(x?)$/,
-				exclude: /node_modules/,
-				loader: 'ts-loader',
+        exclude: /node_modules/,
+        loader: 'ts-loader',
       },
       {
         test: /\.(sa|sc|c)ss$/,
-				exclude: /node_modules/,
+        exclude: /node_modules/,
         use: [
           'style-loader',
           'css-loader',
@@ -54,32 +54,44 @@ module.exports = merge(common, {
           'sass-loader',
         ],
       },
-			{
-				test: /.*\.(gif|png|jp(e*)g|svg)$/i,
-				use: [
-						{
-								loader: "url-loader",
-						}
-				]
-			},
-			// All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-			{
-				enforce: 'pre',
-				test: /\.js$/,
-				loader: 'source-map-loader',
-			},
-		],
-	},
-	plugins: [
+      {
+        test: /\.(eot|svg|ttf|woff|woff2)$/i,
+        use: [
+            {
+                loader: "url-loader",
+            }
+        ]
+      },
+      {
+        test: /\.(png|jpg)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: { name: 'images/[name]-[hash:8].[ext]' },
+          },
+        ],
+      },
+      // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
+      {
+        enforce: 'pre',
+        test: /\.js$/,
+        loader: 'source-map-loader',
+      },
+    ],
+  },
+  watchOptions: {
+    ignored: /node_modules/,
+  },
+  plugins: [
     new WebpackNotifier({title: 'Webpack'}),
-		new HtmlWebpackPlugin({
-			template: resolve('public/index.html'),
+    new HtmlWebpackPlugin({
+      template: resolve('public/index.html'),
       filename: resolve('dist/index.html'),
       minify: {
         minifyCSS: false,
         minifyJS: false,
       }
     }),
-		new HotModuleReplacementPlugin(),
-	],
+    new HotModuleReplacementPlugin(),
+  ],
 })
