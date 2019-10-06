@@ -7,7 +7,7 @@ import TourDates from '@/components/TourDates/Container';
 import Contact from '@/components/Contact/Container';
 import Footer from '@/components/Footer/Container';
 
-import './style.scss'
+import '@/styles/main.scss';
 
 const App = () => (
   <>
