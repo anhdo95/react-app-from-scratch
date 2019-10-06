@@ -17,8 +17,19 @@
   }
 }
 
+.quote {
+  font-size: 14px;
+  font-style: italic;
+  color: $c-dark;
+
+  @media (min-width: $s) {
+    font-size: 16px;
+  }
+}
+
 .description {
   font-size: 14px;
+  text-align: justify;
 
   @media (min-width: $s) {
     font-size: 16px;
