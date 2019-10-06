@@ -1,4 +1,5 @@
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const { resolve } = require('./util')
 
 module.exports = {
@@ -28,5 +29,11 @@ module.exports = {
 		new CleanWebpackPlugin({
       cleanOnceBeforeBuildPatterns: [ resolve('dist') ]
     }),
+    new CopyWebpackPlugin([
+      {
+        from: 'src/assets',
+        to: 'assets'
+      }
+    ])
 	],
 }
